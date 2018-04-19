@@ -1,0 +1,31 @@
+{
+  "name": "bc-log-viewer",
+  "version": "1.0.0",
+  "description": "Log Viewer",
+  "main": "out/index.js",
+  "scripts": {
+    "test": "test",
+    "build": "flow-remove-types src/ -d out/",
+    "build:run": "npm run build && node out/index.js",
+    "start": "nodemon --watch ./src --delay 500ms --exec npm run build:run"
+  },
+  "keywords": [
+    "bc",
+    "log",
+    "viewer"
+  ],
+  "author": "aamadeo27",
+  "license": "ISC",
+  "dependencies": {
+    "koa-body": "^2.5.0",
+    "koa-qs": "^2.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
+    "koa2": "^2.0.0-alpha.7",
+    "koa2-cors": "^2.0.5",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "flow-remove-types": "^1.2.3"
+  }
+}

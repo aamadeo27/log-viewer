@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.log-list {
+  font-size: 2vh !important;
+  overflow-y: scroll;
+}
+
+.logs {
+  height: 30vh;
+  font-size: 1.5vh;
+  border: 1px solid #444;
+  overflow: scroll;
+}
+
+.log-line {
+  margin-left: 1vw;
+  white-space: nowrap;
+  clear: both;
+  cursor: pointer;
+}
+
+.log-line:hover {
+  background: #229;
+  color: white;
+  font-weight: bold;
+}
+
+.log-detail {
+  height: 40vh;
+  width: 100%;
+  border: 1px solid #444;
+  overflow: scroll;
+  white-space:nowrap;
+}
+
+.sidebar {
+  background: #DDD;
+  cursor: pointer;
+}
+
+.filter {
+  margin: 2vw;
+}
