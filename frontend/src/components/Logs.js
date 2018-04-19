@@ -9,7 +9,7 @@ class Logs extends Component {
 
         this.props.log.startLoading()
         api.loadLog( file )
-            .then( data => this.props.log.setLog(data) )
+            .then( data => this.props.log.setLog(data, file) )
             .catch( err => {
                 console.error(err)
             })

@@ -1,6 +1,9 @@
 import { observable, computed, action } from 'mobx'
 
+const BASE_REGEX = new RegExp()
+
 class Log {
+    @observable name = ""
     @observable lines = []
     @observable filter = ""
     @observable filtering = false
@@ -8,7 +11,14 @@ class Log {
     @observable loading = false
 
     @computed get filtered(){
-        const regex = new RegExp(this.filter,"i")
+        let regex = BASE_REGEX
+
+        try {
+            regex = new RegExp(this.filter,"i")
+        } catch (err){
+            console.error("Bad Filter", this.filter)
+        }
+
         const filtered =  this.lines.map( (line, index) => ({ line, index }) ).filter( e => !this.filter || regex.test(e.line))
 
         return filtered
@@ -18,17 +28,14 @@ class Log {
         return this.lines.length > 0 ? this.lines.get(this.currentIdx) : ""
     }
 
-    @action addLines(lines){
-        this.lines = [...this.lines, ...lines]
-    }
-
     @action startLoading(){
         this.lines = []
         this.loading = true
     }
 
-    @action setLog(content){
+    @action setLog(content, name){
         this.loading = false
+        this.name = name
 
         const regex = /(\[\d\d\/\d\d\/\d\d\d\d\]\[\d\d:\d\d:\d\d\])/
         const buffer =  []

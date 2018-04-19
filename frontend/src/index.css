@@ -23,6 +23,7 @@ body {
   cursor: pointer;
 }
 
+.log-line:focus,
 .log-line:hover {
   background: #229;
   color: white;
@@ -43,5 +44,10 @@ body {
 }
 
 .filter {
-  margin: 2vw;
+  margin: 1vw;
+}
+
+.tag {
+  font-weight: 250;
+  margin-left: 1vw;
 }

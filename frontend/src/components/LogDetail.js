@@ -4,10 +4,22 @@ import { TextArea } from 'semantic-ui-react'
 
 @observer
 class Log extends Component {
+    shouldComponentUpdate({ log }){
+        return log.currentLine !== this.props.log.currentLine
+    }
+
     render(){
         const { currentLine } = this.props.log
 
-        return <TextArea className="log-detail" value={currentLine} />
+        const firstTags = /.+](?=[^[].+?)/
+
+        let msg = ""
+        if ( currentLine ){
+            let buffer = currentLine.match(firstTags)[0]
+            msg = currentLine.substring(buffer.length)
+        }
+
+        return <TextArea className="log-detail" value={msg} />
     }
 }
 

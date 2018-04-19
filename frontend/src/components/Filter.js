@@ -5,7 +5,6 @@ import { Input } from 'semantic-ui-react'
 @observer
 class FileFilter extends Component {
     changeFilter(e){
-
         this.props.list.filtering = true
         this.props.list.filter = e.target.value
         this.props.list.filtering = false
