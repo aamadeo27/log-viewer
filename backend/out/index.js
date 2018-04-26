@@ -16,6 +16,7 @@ const UI_HOST = "http://10.150.55.146:3000"
 const APP_PORT = 8087
 const ROOT_DIR = __dirname + "/public"
 const LOG_DIR = ROOT_DIR + "/log"
+const prefixLength = LOG_DIR.length + 1
 
 app.use(cors({
     origin: UI_HOST,
@@ -27,7 +28,14 @@ app.use(cors({
 app.use(static(ROOT_DIR))
 
 router.get('/logs', async ctx => {
-    ctx.body = await dir.list(LOG_DIR)
+    try {
+        let logs = await dir.list(LOG_DIR)
+        logs = logs.map( f => f.substring(prefixLength) )
+
+        ctx.body = logs
+    } catch (err ){
+        console.error(err)
+    }
 })
 
 app.use(router.routes())

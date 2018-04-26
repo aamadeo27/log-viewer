@@ -24,7 +24,7 @@ class Logs extends Component {
             <List.Content>{file}</List.Content>
         </List.Item>)
         
-        return <List className="log-list">
+        return <List className="log-list" celled>
             {displayedList}
         </List>
     }
