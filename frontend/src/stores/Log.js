@@ -30,14 +30,14 @@ class Log {
 
     @action startLoading(){
         this.lines = []
+        this.filter = ""
         this.loading = true
     }
 
-    @action setLog(content, name){
+    @action setLog(content, name, regex){
         this.loading = false
         this.name = name
 
-        const regex = /(\[\d\d\/\d\d\/\d\d\d\d\]\[\d\d:\d\d:\d\d\])/
         const buffer =  []
         const tmp = content.split(regex)
         const toInt = x => parseInt(x,10)

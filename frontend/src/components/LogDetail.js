@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { observer } from 'mobx-react'
-import { TextArea } from 'semantic-ui-react'
+import { TextArea, Container } from 'semantic-ui-react'
 
 @observer
 class Log extends Component {
@@ -19,7 +19,9 @@ class Log extends Component {
             msg = currentLine.substring(buffer.length)
         }
 
-        return <TextArea className="log-detail" value={msg} />
+        return <Container>
+            <TextArea className="log-detail" value={msg}/>
+        </Container>
     }
 }
 

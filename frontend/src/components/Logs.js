@@ -6,10 +6,11 @@ import * as api from '../api'
 @observer
 class Logs extends Component {
     onClick(file){
-
-        this.props.log.startLoading()
+        const { log, config } = this.props
+        
+        log.startLoading()
         api.loadLog( file )
-            .then( data => this.props.log.setLog(data, file) )
+            .then( data => log.setLog(data, file, config.regex) )
             .catch( err => {
                 console.error(err)
             })

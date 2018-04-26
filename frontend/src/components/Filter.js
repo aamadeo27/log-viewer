@@ -4,25 +4,41 @@ import { Input } from 'semantic-ui-react'
 
 @observer
 class FileFilter extends Component {
-    changeFilter(e){
-        this.props.list.filtering = true
-        this.props.list.filter = e.target.value
-        this.props.list.filtering = false
+    constructor(props){
+        super(props)
+
+        this.state = { filter: this.props.list.filter }
     }
 
+    onPressKey(e){
+        if ( e.key === 'Enter' ){
+            this.props.list.filtering = true
+            this.props.list.filter = this.state.filter
+            this.props.list.filtering = false
+        }
+    }
+
+    onChange(e){
+        this.setState({ filter: e.target.value })
+    }
+    
+
     render(){
-        const { filter, filtering } = this.props.list
+        const { filtering } = this.props.list
+        const { size } = this.props
+        const { filter } = this.state
 
         const props = {
             value: filter,
-            onChange: this.changeFilter.bind(this),
+            onKeyPress: this.onPressKey.bind(this),
+            onChange: this.onChange.bind(this),
             placeholder:"filter",
             icon:"filter",
             loading: filtering
         }
 
-        return <div className="filter">
-            <Input {...props}/>
+        return <div style={{ width: size + "vw" }} >
+            <Input {...props} fluid/>
         </div>
     }
 }
