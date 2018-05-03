@@ -86,7 +86,20 @@ class Configuration extends Component {
             <Form.Button color="red" icon="trash" inverted label="&nbsp;" onClick={() => deleteTag(t.name)}/>
         </Form.Group>)
 
-        const onChangeRegex = field => regex => { config[field] = regex }
+        const onChangeRegex = field => regex => { 
+            switch(field){
+                case "regex":
+                    config.setRegex(regex)
+                    break
+                case "tagRegex":
+                    config.setTagRegex(regex)
+                    break
+                case "tagSplit":
+                    config.setTagSplit(regex)
+                    break
+                default:
+            } 
+        }
 
         return <Grid>
             <Grid.Row>

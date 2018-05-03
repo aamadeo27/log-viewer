@@ -9,10 +9,13 @@ const LogLine = ({ logLine, show, config }) => ({
     render(){
         const { logLine, show, config } = this.props
 
-        let buffer = logLine.line.match(config.tagSplit)[0]
+        let buffer = logLine.line.match(config.tagSplit)
+        buffer = buffer ? buffer[0] : "[]"
         let msg = logLine.line.substring(buffer.length)
 
-        buffer = buffer.match(config.tagRegex).map( e => e.replace(/[[\]]/g,"").replace(/^\s+|\s+$/g,"") )
+        buffer = buffer.match(config.tagRegex)
+        buffer = !buffer ? [] : buffer.map( e => e.replace(/[[\]]/g,"").replace(/^\s+|\s+$/g,"") )
+
         const tags = buffer.map( (tagContent,i) => {
             let color = 'grey'
             
