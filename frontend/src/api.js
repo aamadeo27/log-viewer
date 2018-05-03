@@ -1,5 +1,5 @@
 
-const base = process.env.NODE_ENV === 'development' ? 'http://10.150.55.146:8087' : ''
+const base = process.env.NODE_ENV === 'development' ? 'http://falcondes-app1.sis.personal.net.py:8087' : ''
 const url = {
     log: name => `${base}/log/${name}`,
     list: `${base}/logs`

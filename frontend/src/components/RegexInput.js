@@ -42,20 +42,12 @@ class RegexInput extends Component {
             let regexStr = this.state.regex
             let scope = "g"
 
-            try {
-                let bar = regexStr.lastIndexOf("/")
-                
-                if ( bar > 0 ){
-                    if ( regexStr[0] !== '/' ) return this.setState({ error: "Not valid regex " + this.state.regex })
-
-                    scope = regexStr.substring(bar+1)
-                    regexStr = regexStr.substring(1, bar - 1 )
-                }
-                
+            try {                
                 regex = new RegExp(regexStr, scope)
                 close()
                 onChange( regex )
             } catch ( err ){
+                console.log(err)
                 this.setState({ error: "Not valid regex " + regexStr + "/" + scope })
             }    
         }

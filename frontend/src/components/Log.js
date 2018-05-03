@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { observer } from 'mobx-react'
 import { Container, Grid, Loader, Dimmer, Label, Menu } from 'semantic-ui-react'
+import * as api from '../api'
 
 import LogFilter from './Filter'
 
@@ -43,10 +44,19 @@ class Log extends Component {
     }
 
     render(){
-        const { filtered, loading, name } = this.props.log
-        const { config } = this.props
+        const { config, log } = this.props
+        const { filtered, loading, name } = log
 
         const displayedLines = filtered.map( e => <LogLine key={e.index} logLine={e} show={this.showLine.bind(this)} config={config}/>)
+
+        const refresh = () => {
+            log.startLoading()
+            api.loadLog( name )
+                .then( data => log.setLog(data, name, config.regex) )
+                .catch( err => {
+                    console.error(err)
+                })
+        }
         
         return <div>
             <Dimmer active={loading}>
@@ -58,7 +68,7 @@ class Log extends Component {
                         <Grid.Column width={16}>
                             { name ? <Menu borderless>
                                 <Menu.Item header>{name}</Menu.Item>
-                                <Menu.Item icon="refresh" />
+                                <Menu.Item icon="refresh" onClick={refresh}/>
                                 <Menu.Item>
                                     <LogFilter list={this.props.log} size={40}/>
                                 </Menu.Item>
